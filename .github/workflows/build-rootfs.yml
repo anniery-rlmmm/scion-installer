@@ -44,10 +44,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: scion-ios165-output
-          path: |
-           out/
-           scion-build/logs/
-           scion-build/**/*.img
-           scion-build/**/*.dmg
-          if-no-files-found: warn
+          name: scion-small-root
+          path: artifacts-out/
+          if-no-files-found: error
