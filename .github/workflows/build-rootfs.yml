@@ -32,6 +32,14 @@ jobs:
           chmod +x build-installer.sh
           ./build-installer.sh --ipsw /tmp/iPhone10,3,iPhone10,6_16.5_20F66_Restore.ipsw --device starlte --no-sileo
 
+      - name: Recolectar small root e imágenes
+        if: always()
+        run: |
+          mkdir -p artifacts-out
+          sudo find scion-build -maxdepth 4 -type f \( -name "*.img" -o -name "*.dmg" -o -name "*root*" \) -exec cp --parents {} artifacts-out/ \; 2>/dev/null || true
+          sudo chown -R $USER:$USER artifacts-out
+          ls -lhR artifacts-out
+          
       - name: Subir resultado y logs
         if: always()
         uses: actions/upload-artifact@v4
